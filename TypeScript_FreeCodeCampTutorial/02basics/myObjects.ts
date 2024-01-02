@@ -63,6 +63,21 @@ type User2 = {
 
 }
 
+type cardNumber = {
+    numberCard: string
+}
+
+type cardDate = {
+    dateCard : string
+}
+
+// aşağıdaki gibi mevcut tanımlanan tiplerin içeriği başka bir tip tanımlanmak suretiyle değiştirilebiliyor. İyi bir yöntem değil ama yapılmasına imkan var görüldüğü üzere.
+// çok fazla yazılımcının olduğu ortamda bu şekilde değiştirilmeleri mümkün bu da sıkıntılı bir durum.
+
+type cardDetails = cardDate & cardNumber & {
+    cvv: number
+}
+
 let myUser: User2 = {
     _id: "1234",
     name: "özlem",
