@@ -66,5 +66,42 @@ function addFive(num: number):number{
 const getHello = (s: string):string => {
     return ""
 }
-    
+
+// aşağıda da typestript string olarak tipi belirleyecektir.
+// ancak dönüş değeri için yine her şey girilebilir durumdadır bu halde
+const heros = ["thor", "spiderman", "ironman"]
+
+heros.map(hero => {
+    return `hero is ${hero}` // burata return 2 yazsak da kızmaz
+})
+
+// dönüş değerinin de string olması için aşağıdaki gibi yazmalıyız
+
+const heros2 = ["thor", "spiderman", "ironman"]
+
+heros.map((hero):string => {
+    return `hero is ${hero}` // buraya artık return 2 yazamayız.
+})
+
+// void
+
+// aşağıdaki bir void fonksiyondur bu nedenle return değeri yoktur.
+function consoleError(errmsg:string):void {
+    console.log(errmsg)
+}
+
+// never
+
+// void de bir değer dönmez(return olmaz)
+// neverda da hiçbir değer dönmez. birbirleriyle aynı gibi görünürler ama değildir.
+// aşağıdaki örnekteki gibi birtakım hatayla baş etme yöntemi vardır ve bunu biz kasten yaparız. 
+// hata fırlatırız.
+// dökümantasyona göre never type ı değerleri temsil eder ancak asla gözlemlenemez.
+// yani fonksiyon exception fırlatabilir ya da programın çalışmasını durdurabilir.
+
+function handleError(errmsg:string):never {
+    throw new Error(errmsg)
+}
+
+
 export{}
