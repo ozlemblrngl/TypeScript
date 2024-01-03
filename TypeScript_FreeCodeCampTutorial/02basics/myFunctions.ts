@@ -92,7 +92,8 @@ function consoleError(errmsg:string):void {
 
 // never
 
-// void de bir değer dönmez(return olmaz)
+// void de bir return olmaz. 
+// void returns undefined, never doesn't return anything
 // neverda da hiçbir değer dönmez. birbirleriyle aynı gibi görünürler ama değildir.
 // aşağıdaki örnekteki gibi birtakım hatayla baş etme yöntemi vardır ve bunu biz kasten yaparız. 
 // hata fırlatırız.
