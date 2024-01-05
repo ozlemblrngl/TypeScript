@@ -11,40 +11,47 @@ type Props= {
     setToDos:React.Dispatch<React.SetStateAction<ToDo[]>>
 }
 
-const SingleToDo= ({todo, todos, setToDos}:Props) => {
+const SingleToDo = ({ todo, todos, setToDos }: Props) => {
 
-    const [edit, setEdit] = useState<boolean>(false)
-    const [editToDo, setEditToDO] = useState<string>("")
-    
+    const [edit, setEdit] = useState<boolean>(false);
+    const [editToDo, setEditToDO] = useState<string>(todo.toDo);
+
     const handleDone = (id: number) => {
         setToDos(todos.map((todo) =>
             todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
         ));
     };
-    
-    const handleDelete = (id:number) =>{
-        setToDos(todos.filter((todo) => todo.id !== id))
 
-    }
+    const handleDelete = (id: number) => {
+        setToDos(todos.filter((todo) => todo.id !== id));
+    };
 
-    }
-  return (
-    <form className='todos__single'>
-        {
-            todo.isDone ? (
-                <s className='todos__single--text'>{todo.toDo}</s>
-            ): (
-                <span className='todos__single--text'>{todo.toDo}</span>
-            )
-        }
-       
+    return (
+        <form className='todos__single'>
+            {
+                edit? (
+                    <input value= {editToDo}/>
+                ): (
+                    todo.isDone ? (
+                            <s className='todos__single--text'>{todo.toDo}</s>
+                        ) : (
+                            <span className='todos__single--text'>{todo.toDo}</span>
+                        )
+                ) }
+
             <div>
-               <span className="icon"><BiSolidEditAlt /></span>
-               <span className="icon" onClick={()=>handleDelete(todo.id)}><MdDelete /></span>
-               <span className="icon" onClick={()=>handleDone(todo.id)}><MdDoneAll/></span>
+                <span className="icon" onClick={() => {
+                    if (!edit && !todo.isDone) {
+                        setEdit(!edit);
+                    }
+                }}>
+                    <BiSolidEditAlt />
+                </span>
+                <span className="icon" onClick={() => handleDelete(todo.id)}><MdDelete /></span>
+                <span className="icon" onClick={() => handleDone(todo.id)}><MdDoneAll /></span>
             </div>
-    </form>
-  )
-}
+        </form>
+    );
+};
 
-export default SingleToDo
+export default SingleToDo;
