@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ToDo } from '../model'
 import {BiSolidEditAlt } from 'react-icons/bi'
 import {MdDoneAll} from 'react-icons/md'
@@ -25,12 +25,33 @@ const SingleToDo = ({ todo, todos, setToDos }: Props) => {
     const handleDelete = (id: number) => {
         setToDos(todos.filter((todo) => todo.id !== id));
     };
+    
+    const handleEdit = (e:React.FormEvent, id:number)=>{
+        e.preventDefault();
 
+        setToDos(
+            todos.map((todo)=>(
+            todo.id === id ? {...todo, todo:editToDo}
+                          :todo))
+          );
+        setEdit(false);
+    };
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(()=>{
+        inputRef.current?.focus()
+    },[edit])
+
+   
     return (
-        <form className='todos__single'>
+        <form className='todos__single' onSubmit={(e)=>handleEdit(e,todo.id)}>
             {
-                edit? (
-                    <input value= {editToDo}/>
+                edit ? (
+                    <input 
+                    ref={inputRef}
+                    value= {editToDo} 
+                    onChange={(e) => setEditToDO(e.target.value)} 
+                    className='todos__single--test'/>
                 ): (
                     todo.isDone ? (
                             <s className='todos__single--text'>{todo.toDo}</s>
